@@ -8,17 +8,14 @@ declaration: >-
 
 # add as many "name+comment" entries as necessary
 # (or remove it altogether if you haven't collaborated with anyone)
-collaboration:
 
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-code:
 
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
-assets:
 
 
 # sign *your* name and uid here
