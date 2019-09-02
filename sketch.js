@@ -6,16 +6,21 @@
 // variable setup
 var backgroundImage;
 var taskbar;
+var time;
+var date;
+
 var viewer;
 var viewerImage;
 var viewerSize;
-var time;
-var date;
+
+var hiddenBackground;
+
 
 function preload() { // preload images
   backgroundImage = loadImage('assets/windows7-wallpaper-def.png');
   taskbar = loadImage('assets/taskbar.png');
   viewerImage = loadImage('assets/window.png');
+  hiddenBackground = loadImage('assets/circuit-board.jpg');
 }
 
 function setup() { 
@@ -79,22 +84,27 @@ function setup() {
   backgroundImage.resize(wWidth, wHeight);
   taskbar.resize(wWidth, wHeight/14);
   viewerImage.resize(viewer.viewerW,viewer.viewerH);
+  hiddenBackground.resize(wWidth, wHeight);
 
   // setup
   background(255);
   textSize(wHeight/38);
   textFont('Helvetica');
   noStroke();
-  fill(255);
+  fill(200, 230);
 }
 
 function draw() {
+  // create peep hole sub image
+  image(hiddenBackground, 0, 0);
+  let subImage = get(viewer.x, viewer.y, viewer.viewerW*0.97, viewer.viewerH*0.9);
+
   // draw background
   image(backgroundImage, 0, 0);
   image(taskbar, 0, wHeight - (wHeight/14));
   
   // draw time-date text
-  var today = new Date();
+  let today = new Date();
   time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   text(time, wWidth - (wWidth/13), wHeight - (wHeight/25));
   date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
@@ -117,6 +127,9 @@ function draw() {
   }
   // draw viewer
   image(viewerImage, viewer.x, viewer.y);
+
+  // draw peep hole from sub image
+  image(subImage, viewer.x + (wWidth*0.005), viewer.y + wHeight*0.045);
 }
 
 function mousePressed() {
