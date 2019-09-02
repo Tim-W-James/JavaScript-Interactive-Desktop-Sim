@@ -12,10 +12,26 @@ declaration: >-
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
+code:
+  - comment: "Draggable by icm from P5 Templates & Documentation"
+    url: https://editor.p5js.org/projects/B13wH5T3
+    licence: fair use
 
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
+assets:
+  - comment: "Windows 7 Wallpaper by Microsoft"
+    url: https://upload.wikimedia.org/wikipedia/en/5/50/Windows_7_SP1_screenshot.png
+    licence: fair use
+
+  - comment: "Windows UI Element by Microsoft"
+    url: https://upload.wikimedia.org/wikipedia/en/5/50/Windows_7_SP1_screenshot.png
+    licence: fair use
+
+  - comment: "Circuit Board Wallpaper by Thomas Soellner"
+    url: https://www.123rf.com/photo_81477230_stock-vector-vector-blue-electronic-circuit-board-background.html
+    licence: standard free licence
 
 
 # sign *your* name and uid here

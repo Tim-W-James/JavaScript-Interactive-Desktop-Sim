@@ -1,52 +1,134 @@
-var backgroundImage;
+/*  COMP1720 Assignment 2
+*   2019 Sem 2
+*   Tim James - u6947396
+*/
 
-function preload() {
-  backgroundImage = loadImage('assets/windows-xp-bliss.jpg');
+// variable setup
+var backgroundImage;
+var taskbar;
+var viewer;
+var viewerImage;
+var viewerSize;
+var time;
+var date;
+
+function preload() { // preload images
+  backgroundImage = loadImage('assets/windows7-wallpaper-def.png');
+  taskbar = loadImage('assets/taskbar.png');
+  viewerImage = loadImage('assets/window.png');
 }
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
+function setup() { 
+  // setup canvas dimensions
+  wWidth = (16*windowHeight)/9;
+  wHeight = windowHeight;
+  viewerSize = windowHeight/2,
+  createCanvas(wWidth, wHeight);
+  document.body.style.overflow = 'hidden';
 
-  // since we're going to be drawing the background image at the same size each
-  // frame, we re-size it once here in setup()
-  backgroundImage.resize(windowWidth, windowHeight);
+  // viewer object stores information about the viewer window
+  viewer = {
+    // position
+    x : wHeight/6,
+    y : wHeight/6,
+    xOffset : 0,
+    yOffset : 0,
+    // dimensions
+    viewerW : viewerSize,
+    viewerH : viewerSize,
+    // interactive element dimensions
+    dragW : viewerSize,
+    dragH : viewerSize/12,
+    disabledW : viewerSize/5,
+    disabledH : viewerSize/12,
+    isDragging : false,
+    isHovering : false,
+    isDisabled : false,
+    // checks what the mouse is hovering over
+    checkHovering : function() {
+      this.isHovering = (mouseX > this.x && mouseX < this.x + this.dragW - this.viewerW*0.25 
+        && mouseY > this.y && mouseY < this.y + this.dragH);
+      this.isDisabled = (mouseX > this.x + this.viewerW*0.75 && mouseX < this.x + this.dragW 
+        && mouseY > this.y && mouseY < this.y + this.dragH);
+      return this.isHovering;
+    },
+    // updates the position of the window
+    updatePos : function() {
+      var nextPosX = mouseX + this.xOffset;
+      var nextPosY = mouseY + this.yOffset;
+
+      if (this.isDragging) {
+        if (nextPosX < 0)
+          this.x = 0;
+        else if (nextPosX > wWidth - this.viewerW)
+          this.x = wWidth - this.viewerW;
+        else
+          this.x = nextPosX;
+        
+        if (nextPosY < 0)
+          this.y = 0;
+        else if (nextPosY > wHeight - this.viewerH - (wHeight/14))
+          this.y = wHeight - this.viewerH - (wHeight/14);
+        else
+          this.y = nextPosY;
+      }
+    }
+  };
+
+  // image dimensions
+  backgroundImage.resize(wWidth, wHeight);
+  taskbar.resize(wWidth, wHeight/14);
+  viewerImage.resize(viewer.viewerW,viewer.viewerH);
+
+  // setup
+  background(255);
+  textSize(wHeight/38);
+  textFont('Helvetica');
+  noStroke();
+  fill(255);
 }
 
 function draw() {
-  // this `image()` function call is just an example---you should change (or
-  // remove) it in your submitted assignment
+  // draw background
   image(backgroundImage, 0, 0);
+  image(taskbar, 0, wHeight - (wHeight/14));
+  
+  // draw time-date text
+  var today = new Date();
+  time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  text(time, wWidth - (wWidth/13), wHeight - (wHeight/25));
+  date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+  text(date, wWidth - (wWidth/13), wHeight - (wHeight/100));
 
-  // you can keep this `drawWindow()` function call in your final sketch
-  drawWindow();
+  // check if what the mouse is hovering over
+  viewer.checkHovering();
+  // if being dragged, update position
+  viewer.updatePos();
+  
+  // changed cursor based on current operation
+  if (viewer.isDragging) {
+    cursor('grab');
+  } else if (viewer.isDisabled) {
+    cursor('not-allowed');
+  } else if (viewer.isHovering) {
+    cursor(HAND);
+  } else {
+    cursor(ARROW);
+  }
+  // draw viewer
+  image(viewerImage, viewer.x, viewer.y);
 }
 
-function drawWindow() {
-  // start with a "push" so that we can go back to the current drawing state
-  // (e.g. fill/stroke colour) at the end of the function
-  push();
-  fill(230);
-  noStroke();
+function mousePressed() {
+  // update viewer offset on valid drag
+  if(viewer.checkHovering()) {
+    viewer.isDragging = true;
+    viewer.xOffset = viewer.x-mouseX;
+    viewer.yOffset = viewer.y-mouseY;
+  }
+}
 
-  // the width (and height) of the window "edge"
-  var edge = 50;
-
-  // draw the background "walls"
-  rect(0, 0, edge, height);
-  rect(0, 0, width, edge);
-  rect(0, height-edge, width, edge);
-  rect(width-edge, 0, edge, height);
-
-  // now draw the window (including bars & sill)
-  stroke(130, 82, 1);
-  noFill();
-  strokeWeight(10);
-  rect(edge, edge, width-edge*2, height-edge*2);
-  line(edge, height/2, width-edge, height/2);
-  line(width/2, edge, width/2, height-edge);
-  fill(150, 92, 1);
-  rect(0+edge/2, height-edge*1.5, width-edge, edge/2);
-
-  // pop drawing context back to original state (i.e. when `push()` was called)
-  pop();
+function mouseReleased() {
+  // stop dragging when mouse is released
+  viewer.isDragging = false;
 }
