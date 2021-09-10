@@ -31,7 +31,7 @@
   <p align="center">
     An interactive art piece for a simulated PC desktop
     <br />
-    This project was created during my university studies at ANU in <b>2020</b> and has been transferred from the <b>ANU GitLab</b> server.
+    This project was created during my university studies at ANU in <b>2019</b> and has been transferred from the <b>ANU GitLab</b> server.
     <br />
 <!--     <a href="https://github.com/Tim-W-James/repo_name"><strong>Explore the docs »</strong></a>
     <br /> 
