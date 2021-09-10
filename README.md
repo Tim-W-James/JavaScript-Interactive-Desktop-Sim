@@ -31,7 +31,7 @@
   <p align="center">
     An interactive art piece for a simulated PC desktop
     <br />
-    
+    This project was created during my university studies at ANU in <b>2020</b> and has been transferred from the <b>ANU GitLab</b> server.
     <br />
 <!--     <a href="https://github.com/Tim-W-James/repo_name"><strong>Explore the docs »</strong></a>
     <br /> 
@@ -53,7 +53,6 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#features">Features</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -83,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/Tim-W-James/JavaScript-Interactive-Desktop-Sim)
+[![Screen Shot][product-screenshot]](https://github.com/Tim-W-James/JavaScript-Interactive-Desktop-Sim)
 
 Interactive art piece based on the theme 'interactive picture window'. Read the [artist statement](https://github.com/Tim-W-James/JavaScript-Interactive-Desktop-Sim/blob/master/artist-statement.md) for the thinking behind the project.
 
@@ -133,7 +132,7 @@ Project Link: [https://github.com/Tim-W-James/JavaScript-Interactive-Desktop-Sim
 
 * Australian National University for VSCode framework and project skeleton
 
-
+[product-screenshot]: screenshot.png
 
 <!-- USEFUL LINKS FOR MARKDOWN
 * https://www.markdownguide.org/basic-syntax
