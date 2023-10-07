@@ -86,6 +86,8 @@
 
 Interactive art piece based on the theme 'interactive picture window'. Read the [artist statement](https://github.com/Tim-W-James/JavaScript-Interactive-Desktop-Sim/blob/master/artist-statement.md) for the thinking behind the project.
 
+[View live demo](https://interactive-desktop-sim.timjames.dev/)
+
 ### Built With
 
 * JavaScript
